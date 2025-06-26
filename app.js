@@ -476,11 +476,14 @@ function mostrarNotificacion(mensaje) {
     // Agregar al documento
     document.body.appendChild(notificacion);
     
-    // Eliminar después de 3 segundos
+    // Eliminar después de 3 segundos con animación
     setTimeout(function() {
-        if (notificacion.parentNode) {
-            notificacion.parentNode.removeChild(notificacion);
-        }
+        notificacion.classList.add('saliendo');
+        setTimeout(function() {
+            if (notificacion.parentNode) {
+                notificacion.parentNode.removeChild(notificacion);
+            }
+        }, 300);
     }, 3000);
 }
 

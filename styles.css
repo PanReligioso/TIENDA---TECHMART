@@ -39,6 +39,7 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: var(--texto-claro);
     transition: all 0.3s ease;
+    animation: deslizarArriba 0.8s ease-out;
 }
 
 /* Tema oscuro para el body */
@@ -58,6 +59,7 @@ body {
     padding: 15px 0;
     z-index: 1000;
     transition: all 0.3s ease;
+    animation: deslizarArriba 0.6s ease-out;
 }
 
 /* Tema oscuro para la barra */
@@ -74,6 +76,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    animation: deslizarDerecha 0.8s ease-out;
 }
 
 /* Logo de la tienda */
@@ -81,12 +84,19 @@ body {
     font-size: 1.8rem;
     font-weight: bold;
     color: var(--texto-claro);
+    transition: all 0.3s ease;
+    animation: deslizarDerecha 1s ease-out;
+}
+
+.logo:hover {
+    animation: latidoSuave 1s ease-in-out;
 }
 
 /* Menú de navegación */
 .menu-navegacion {
     display: flex;
     gap: 30px;
+    animation: deslizarArriba 1.2s ease-out;
 }
 
 .menu-navegacion a {
@@ -94,18 +104,37 @@ body {
     text-decoration: none;
     padding: 10px 15px;
     border-radius: 5px;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-navegacion a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.menu-navegacion a:hover::before {
+    left: 100%;
 }
 
 .menu-navegacion a:hover {
     background: var(--cyan-acento);
     color: var(--blanco);
+    transform: translateY(-2px);
 }
 
 /* === BOTÓN DE CAMBIO DE TEMA === */
 .contenedor-tema {
     display: flex;
     align-items: center;
+    animation: deslizarIzquierda 1s ease-out;
 }
 
 .boton-tema {
@@ -121,12 +150,33 @@ body {
     justify-content: center;
     width: 45px;
     height: 45px;
+    position: relative;
+    overflow: hidden;
+}
+
+.boton-tema::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: var(--cyan-acento);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.boton-tema:hover::before {
+    width: 100%;
+    height: 100%;
 }
 
 .boton-tema:hover {
-    background: var(--cyan-acento);
     color: var(--blanco);
     transform: rotate(180deg);
+    animation: pulsoColor 1.5s infinite;
 }
 
 /* Botones de usuario */
@@ -134,6 +184,7 @@ body {
     display: flex;
     gap: 15px;
     align-items: center;
+    animation: deslizarIzquierda 1.4s ease-out;
 }
 
 .boton-login {
@@ -144,11 +195,29 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.boton-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--azul-principal);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.boton-login:hover::before {
+    left: 0;
 }
 
 .boton-login:hover {
-    background: var(--azul-principal);
     color: var(--blanco);
+    transform: scale(1.05);
 }
 
 .boton-carrito {
@@ -159,11 +228,12 @@ body {
     border-radius: 5px;
     cursor: pointer;
     position: relative;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .boton-carrito:hover {
     transform: scale(1.05);
+    animation: latidoSuave 0.6s ease-in-out;
 }
 
 /* Contador de productos en el carrito */
@@ -180,6 +250,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: latidoSuave 2s infinite;
+    transition: all 0.3s ease;
+}
+
+.contador-productos:hover {
+    animation: rotar 0.5s ease-in-out;
 }
 
 /* === CARRUSEL === */
@@ -187,6 +263,7 @@ body {
 .seccion-carrusel {
     margin-top: 70px;
     height: 500px;
+    animation: deslizarArriba 1s ease-out;
 }
 
 /* Contenido de cada slide */
@@ -198,17 +275,20 @@ body {
     align-items: center;
     text-align: center;
     background: linear-gradient(45deg, #667eea, #764ba2);
+    animation: deslizarArriba 1.2s ease-out;
 }
 
 .contenido-slide h1 {
     font-size: 3rem;
     margin-bottom: 20px;
     font-weight: bold;
+    animation: deslizarArriba 1.4s ease-out;
 }
 
 .contenido-slide p {
     font-size: 1.2rem;
     margin-bottom: 30px;
+    animation: deslizarArriba 1.6s ease-out;
 }
 
 /* === BOTONES PRINCIPALES === */
@@ -221,11 +301,33 @@ body {
     cursor: pointer;
     font-size: 1rem;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: deslizarArriba 1.8s ease-out;
+}
+
+.boton-principal::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+}
+
+.boton-principal:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .boton-principal:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+    animation: flotar 2s ease-in-out infinite;
 }
 
 .boton-completo {
@@ -341,10 +443,28 @@ body {
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.boton-agregar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.boton-agregar:hover::before {
+    left: 100%;
 }
 
 .boton-agregar:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
 }
 
 /* === MODALES === */
@@ -640,17 +760,101 @@ body {
     border-radius: 5px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     z-index: 9999;
-    animation: deslizarEntrada 0.3s ease;
+    animation: deslizarIzquierda 0.3s ease, latidoSuave 0.5s ease 0.3s;
+    transform: translateX(0);
+    transition: all 0.3s ease;
 }
 
-@keyframes deslizarEntrada {
-    from {
+.notificacion:hover {
+    transform: scale(1.05);
+}
+
+/* Animación de salida para notificaciones */
+.notificacion.saliendo {
+    animation: deslizarSalida 0.3s ease forwards;
+}
+
+@keyframes deslizarSalida {
+    to {
         transform: translateX(100%);
         opacity: 0;
     }
+}
+
+/* === ANIMACIONES === */
+/* Animación de entrada desde abajo */
+@keyframes deslizarArriba {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
     to {
-        transform: translateX(0);
         opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación de entrada desde la izquierda */
+@keyframes deslizarDerecha {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animación de entrada desde la derecha */
+@keyframes deslizarIzquierda {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animación de latido suave */
+@keyframes latidoSuave {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Animación de flotación */
+@keyframes flotar {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Animación de rotación */
+@keyframes rotar {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Animación de pulso de color */
+@keyframes pulsoColor {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(30, 64, 175, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(30, 64, 175, 0);
     }
 }
 
@@ -658,26 +862,86 @@ body {
 /* Tablets */
 @media (max-width: 768px) {
     .contenido-barra {
-        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 15px;
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        order: 1;
+        flex: 1 1 100%;
+        text-align: center;
+        font-size: 1.5rem;
     }
     
     .menu-navegacion {
+        order: 2;
+        flex: 1 1 100%;
+        justify-content: center;
         gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .menu-navegacion a {
+        padding: 8px 12px;
+        font-size: 0.9rem;
     }
     
     .contenedor-tema {
-        order: -1;
-        align-self: flex-end;
+        order: 3;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+    
+    .boton-tema {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .botones-usuario {
+        order: 4;
+        flex: 1 1 100%;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .boton-login, .boton-carrito {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .barra-superior {
+        padding: 10px 0;
+    }
+    
+    .seccion-carrusel {
+        margin-top: 120px;
+        height: 400px;
+    }
+    
+    .contenido-slide {
+        height: 400px;
+        padding: 20px;
     }
     
     .contenido-slide h1 {
         font-size: 2rem;
     }
     
+    .contenido-slide p {
+        font-size: 1rem;
+    }
+    
+    .titulo-seccion {
+        font-size: 2rem;
+    }
+    
     .grilla-productos {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
+        padding: 0 15px;
     }
     
     .fila-formulario {
@@ -689,32 +953,219 @@ body {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
+    
+    .contenido-pie {
+        padding: 0 15px;
+    }
 }
 
 /* Móviles */
 @media (max-width: 480px) {
+    .contenido-barra {
+        padding: 10px;
+    }
+    
+    .logo {
+        font-size: 1.3rem;
+    }
+    
+    .menu-navegacion {
+        gap: 10px;
+    }
+    
+    .menu-navegacion a {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .boton-tema {
+        width: 35px;
+        height: 35px;
+        top: 5px;
+        right: 10px;
+    }
+    
+    .botones-usuario {
+        gap: 8px;
+    }
+    
+    .boton-login, .boton-carrito {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .contador-productos {
+        width: 18px;
+        height: 18px;
+        font-size: 0.7rem;
+        top: -6px;
+        right: -6px;
+    }
+    
     .seccion-carrusel {
-        height: 400px;
+        margin-top: 140px;
+        height: 350px;
     }
     
     .contenido-slide {
-        height: 400px;
-        padding: 20px;
+        height: 350px;
+        padding: 15px;
     }
     
     .contenido-slide h1 {
         font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .contenido-slide p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+    
+    .boton-principal {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .titulo-seccion {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
     }
     
     .grilla-productos {
         grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 10px;
     }
     
-    .fila-pie {
+    .tarjeta-producto {
+        max-width: 100%;
+    }
+    
+    .imagen-producto {
+        height: 200px;
+    }
+    
+    .contenido-tarjeta {
+        padding: 15px;
+    }
+    
+    .nombre-producto {
+        font-size: 1.1rem;
+    }
+    
+    .precio-producto {
+        font-size: 1.2rem;
+    }
+    
+    .boton-agregar {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .fila-formulario {
         grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .fila-campos {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .campo-formulario input,
+    .campo-formulario textarea {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+    
+    .resumen-carrito {
+        margin-top: 15px;
     }
     
     .botones-carrito {
         flex-direction: column;
+        gap: 10px;
+    }
+    
+    .boton-vaciar, .boton-comprar {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .boton-pagar {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+    
+    .fila-pie {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .contenido-pie {
+        padding: 0 10px;
+    }
+    
+    .columna-pie h5 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .notificacion {
+        right: 10px;
+        left: 10px;
+        top: 80px;
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    /* Ajustes específicos para elementos del carrito */
+    .elemento-carrito {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px 0;
+    }
+    
+    .imagen-carrito {
+        width: 50px;
+        height: 50px;
+        align-self: center;
+    }
+    
+    .info-producto {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .controles-cantidad {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .boton-cantidad {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .total-carrito {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    
+    .total-pagar {
+        font-size: 1.2rem;
+        text-align: center;
     }
 }
