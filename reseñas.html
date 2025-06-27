@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Meta tags requeridos para Bootstrap -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reseñas de clientes de TechStore - La mejor tienda de tecnología en Perú">
+    <meta name="keywords" content="reseñas, testimonios, opiniones, clientes, TechStore, tecnología">
+    <meta name="author" content="TechStore Team">
+    
+    <title>Reseñas - TechStore</title>
+    
+    <!-- Bootstrap 5.3.0 CSS Framework -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="main.css">
+    
+    <style>
+        /* Estilos específicos para la página de reseñas */
+        .hero-reviews {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: white;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-reviews::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="25" r="1.5" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.08)"/><circle cx="25" cy="75" r="1.2" fill="rgba(255,255,255,0.06)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            border: none;
+        }
+
+        .review-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #e94560, #0f3460);
+        }
+
+        .review-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .review-text::before {
+            content: """;
+            font-size: 4rem;
+            color: #e94560;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+            border: 3px solid #e94560;
+        }
+
+        .reviewer-details h6 {
+            margin: 0;
+            color: #1a1a2e;
+            font-weight: 600;
+        }
+
+        .reviewer-details small {
+            color: #666;
+        }
+
+        .stats-section {
+            background: #f8f9fa;
+            padding: 60px 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #e94560;
+            display: block;
+        }
+
+        .stat-label {
+            color: #666;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .btn-back {
+            background: linear-gradient(45deg, #e94560, #0f3460);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+            color: white;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-shapes::after {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(233, 69, 96, 0.1);
+            border-radius: 50%;
+            top: 20%;
+            right: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-shapes::before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(15, 52, 96, 0.1);
+            border-radius: 50%;
+            bottom: 20%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Animaciones de entrada */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .stagger-animation > * {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+        .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+        .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+        .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+        .stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+        .stagger-animation > *:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Modo oscuro */
+        [data-bs-theme="dark"] .review-card {
+            background-color: #1a1a2e;
+            color: #eaeaea;
+        }
+
+        [data-bs-theme="dark"] .review-text {
+            color: #ccc;
+        }
+
+        [data-bs-theme="dark"] .reviewer-details h6 {
+            color: #eaeaea;
+        }
+
+        [data-bs-theme="dark"] .reviewer-details small {
+            color: #aaa;
+        }
+
+        [data-bs-theme="dark"] .stats-section {
+            background-color: #0a0a0a;
+        }
+
+        [data-bs-theme="dark"] .stat-card {
+            background-color: #1a1a2e;
+            color: #eaeaea;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-reviews {
+                padding: 80px 0 60px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .review-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+    NAVBAR - Bootstrap Components utilizados:
+    - navbar: Componente principal de navegación
+    - navbar-expand-lg: Navbar responsive que se expande en pantallas grandes
+    - navbar-dark: Tema oscuro para navbar
+    - fixed-top: Posición fija en la parte superior
+    - container-fluid: Contenedor de ancho completo con padding
+    - navbar-brand: Marca/logo de la empresa
+    - btn btn-outline-light: Botones con borde claro
+    -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid px-3 px-lg-5">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-microchip"></i> TechStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#productos">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#equipo">Equipo</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="resenas.html">Reseñas</a></li>
+                </ul>
+                <div class="d-flex align-items-center ms-3">
+                    <button class="btn btn-outline-light me-2 me-lg-3" onclick="toggleTheme()">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
+                    <a href="index.html" class="btn-back">
+                        <i class="fas fa-arrow-left"></i>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 
+    HERO SECTION - Bootstrap Utilities:
+    - container-fluid: Contenedor fluido
+    - text-center: Centrado de texto
+    - position-relative: Posición relativa para z-index
+    -->
+    <section class="hero-reviews">
+        <div class="floating-shapes"></div>
+        <div class="container-fluid px-3 px-lg-5 position-relative" style="z-index: 2;">
+            <div class="text-center fade-in-up">
+                <h1 class="display-3 fw-bold mb-4">Reseñas de Nuestros Clientes</h1>
+                <p class="lead mb-5">Descubre lo que dicen nuestros clientes satisfechos sobre TechStore</p>
+                <div class="d-flex justify-content-center align-items-center mb-4">
+                    <div class="stars me-3">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span class="h5 mb-0">4.9/5 basado en 2,847 reseñas</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    ESTADÍSTICAS - Bootstrap Grid System:
+    - container-fluid: Contenedor fluido
+    - row: Fila del sistema de grid
+    - col-6 col-md-3: Columnas responsive (2 en móvil, 4 en desktop)
+    - g-4: Gap de 4 unidades entre columnas
+    -->
+    <section class="stats-section">
+        <div class="container-fluid px-3 px-lg-5">
+            <div class="row g-4 stagger-animation">
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <span class="stat-number">2,847</span>
+                        <div class="stat-label">Reseñas Totales</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <span class="stat-number">98%</span>
+                        <div class="stat-label">Satisfacción</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <span class="stat-number">15K+</span>
+                        <div class="stat-label">Clientes Felices</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <span class="stat-number">4.9</span>
+                        <div class="stat-label">Puntuación Media</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    RESEÑAS PRINCIPALES - Bootstrap Grid y Cards:
+    - py-5: Padding vertical de 5 unidades
+    - container-fluid: Contenedor fluido
+    - row: Fila del sistema de grid
+    - col-lg-4 col-md-6: Columnas responsive (1 en móvil, 2 en tablet, 3 en desktop)
+    - mb-4: Margen inferior
+    - card: Componente card de Bootstrap (personalizado)
+    - d-flex flex-column: Flexbox para layout vertical
+    -->
+    <section class="py-5">
+        <div class="container-fluid px-3 px-lg-5">
+            <h2 class="text-center mb-5 display-4 fw-bold fade-in-up">Testimonios Destacados</h2>
+            <div class="row g-4 stagger-animation">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="review-card d-flex flex-column">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            Increíble servicio al cliente y productos de primera calidad. Compré mi MacBook aquí y la experiencia fue excepcional desde el primer momento hasta la entrega.
+                        </p>
+                        <div class="reviewer-info">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="María García" class="reviewer-avatar">
+                            <div class="reviewer-details">
+                                <h6>María García</h6>
+                                <small>Diseñadora Gráfica</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="review-card d-flex flex-column">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            Los mejores precios del mercado y envío súper rápido. Mi iPhone llegó al día siguiente y venía perfectamente empacado. Definitivamente volveré a comprar aquí.
+                        </p>
+                        <div class="reviewer-info">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Carlos Mendoza" class="reviewer-avatar">
+                            <div class="reviewer-details">
+                                <h6>Carlos Mendoza</h6>
+                                <small>Ingeniero de Software</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="review-card d-flex flex-column">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            Excelente asesoramiento técnico. Me ayudaron a elegir la laptop perfecta para mis necesidades de gaming. El equipo realmente conoce de tecnología.
+                        </p>
+                        <div class="reviewer-info">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Ana Rodríguez" class="reviewer-avatar">
+                            <div class="reviewer-details">
+                                <h6>Ana Rodríguez</h6>
+                                <small>Streamer & Gamer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="review-card d-flex flex-column">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            Muy buena experiencia de compra. Los productos llegaron en perfecto estado y el precio fue muy competitivo. Solo mejoraría un poco el empaque.
+                        </p>
+                        <div class="reviewer-info">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Diego López" class="reviewer-avatar">
+                            <div class="reviewer-details">
+                                <h6>Diego López</h6>
+                                <small>Arquitecto</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="review-card d-flex flex-column">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            Fantástico servicio post-venta. Tuve un problema menor con mi iPad y lo resolvieron inmediatamente. Empresa seria y confiable.
+                        </p>
+                        <div class="reviewer-info">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face" alt="Lucía Vargas" class="reviewer-avatar">
+                            <div class="reviewer-details">
+                                <h6>Lucía Vargas</h6>
+                                <small>Médica</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="review-card d-flex flex-column">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            La mejor tienda de tecnología en Lima. Precios justos, productos originales y atención personalizada. Recomiendo TechStore al 100%.
+                        </p>
+                        <div class="reviewer-info">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Roberto Silva" class="reviewer-avatar">
+                            <div class="reviewer-details">
+                                <h6>Roberto Silva</h6>
+                                <small>Empresario</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    FOOTER - Bootstrap Grid y Text Utilities:
+    - container-fluid: Contenedor fluido
+    - text-center: Centrado de texto
+    - row: Fila del grid
+    - col-12: Columna de ancho completo
+    - mb-3: Margen inferior
+    -->
+    <footer class="footer">
+        <div class="container-fluid px-3 px-lg-5 text-center">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="mb-3">TechStore</h4>
+                    <p class="mb-3">Innovación y tecnología al alcance de todos</p>
+                    <div class="mb-3">
+                        <i class="fab fa-facebook fa-2x mx-2"></i>
+                        <i class="fab fa-instagram fa-2x mx-2"></i>
+                        <i class="fab fa-twitter fa-2x mx-2"></i>
+                        <i class="fab fa-youtube fa-2x mx-2"></i>
+                    </div>
+                    <p>&copy; 2025 TechStore. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5.3.0 JavaScript Bundle -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Toggle tema oscuro (misma función que en index)
+        let isDarkMode = false;
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (isDarkMode) {
+                html.setAttribute('data-bs-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+            } else {
+                html.setAttribute('data-bs-theme', 'light');
+                themeIcon.className = 'fas fa-moon';
+            }
+        }
+
+        // Detectar tema del sistema al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                toggleTheme();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -42,7 +42,6 @@ const products = [
         image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600&h=600&fit=crop",
         description: "El PC gaming definitivo con RTX 4090"
     }
-    
 ];
 
 let cart = [];
